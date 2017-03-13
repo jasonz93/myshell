@@ -62,7 +62,7 @@ if dein#load_state(deinplugins)
 
     call dein#add('Shougo/vimproc.vim', {'build': 'make'})
     call dein#add('Shougo/vimshell.vim')
-    
+
     call dein#end()
     call dein#save_state()
 endif
