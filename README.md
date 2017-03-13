@@ -1,2 +1,3 @@
 # My Shell
-Run apply.sh
+Run `apply.sh`
+
