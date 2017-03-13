@@ -37,6 +37,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Shougo/dein.vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'lrvick/Conque-Shell'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -85,6 +86,12 @@ set expandtab
 set hlsearch " 搜索时高亮显示被找到的文本
 set smartindent " 开启新行时使用智能自动缩进
 
+
+" VimShell
+let g:vimshell_prompt_expr = 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
+let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
+
+
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 set completeopt=longest,menu
@@ -119,3 +126,14 @@ func SkipPair()
 endfunc  
 " 将tab键绑定为跳出括号  
 inoremap <TAB> <c-r>=SkipPair()<CR>
+
+function! DebugJs()
+  let cmd="node --debug-brk "
+  if( expand('%:e') == "coffee")
+    let cmd="coffee --nodejs --debug-brk "
+  endif
+  exec "silent ConqueTermVSplit bash -ic \"(" . cmd . @% . " &) ; sleep 1s && node-vim-inspector\""
+endfunction
+
+" launch debug on ctrl-d
+nnoremap <C-d> :call DebugJs()<CR>   

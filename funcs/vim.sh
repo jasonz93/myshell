@@ -21,6 +21,15 @@ function vim {
             npm install -g instant-markdown-d
         fi
     fi
+
+    # Install vimdebug
+    if node -v; then
+        echo "Node.JS detected, installing vimdebug"
+        if ! npm ls -g|grep vimdebug; then
+            npm install -g vimdebug
+        fi
+    fi
+
     echo "Overwriting .vimrc"
     cat vimrc > ~/.vimrc
     vi +PluginInstall +qall
