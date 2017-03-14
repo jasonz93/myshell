@@ -37,7 +37,12 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Shougo/dein.vim'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'lrvick/Conque-Shell'
+Plugin 'bling/vim-airline'
+Plugin 'gorodinskiy/vim-coloresque'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'Valloric/MatchTagAlways'
+Plugin 'gcmt/wildfire.vim'
+Plugin 'alvan/vim-closetag'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -127,13 +132,3 @@ endfunc
 " 将tab键绑定为跳出括号  
 inoremap <TAB> <c-r>=SkipPair()<CR>
 
-function! DebugJs()
-  let cmd="node --debug-brk "
-  if( expand('%:e') == "coffee")
-    let cmd="coffee --nodejs --debug-brk "
-  endif
-  exec "silent ConqueTermVSplit bash -ic \"(" . cmd . @% . " &) ; sleep 1s && node-vim-inspector\""
-endfunction
-
-" launch debug on ctrl-d
-nnoremap <C-d> :call DebugJs()<CR>   
