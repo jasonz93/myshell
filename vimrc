@@ -90,7 +90,7 @@ set tabstop=4 		" 设定 tab 长度为 4
 set expandtab
 set hlsearch " 搜索时高亮显示被找到的文本
 set smartindent " 开启新行时使用智能自动缩进
-
+set laststatus=2    " 永久显示状态栏
 
 " VimShell
 let g:vimshell_prompt_expr = 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
