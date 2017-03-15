@@ -29,20 +29,21 @@ Plugin 'VundleVim/Vundle.vim'
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'suan/vim-instant-markdown'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'Shougo/dein.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'bling/vim-airline'
-Plugin 'gorodinskiy/vim-coloresque'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'Valloric/MatchTagAlways'
-Plugin 'gcmt/wildfire.vim'
-Plugin 'alvan/vim-closetag'
+Plugin 'godlygeek/tabular' " vim-markdown的依赖
+Plugin 'plasticboy/vim-markdown' " markdown语法高亮
+" Plugin 'suan/vim-instant-markdown' " markdown实时预览(Node.Js)
+Plugin 'iamcco/markdown-preview.vim' " markdown实时预览(Python)
+Plugin 'scrooloose/nerdtree' " 目录树
+Plugin 'Xuyuanp/nerdtree-git-plugin' " 目录树Git插件
+Plugin 'jistr/vim-nerdtree-tabs' "目录树多Tab辅助
+Plugin 'Shougo/dein.vim' " 另一个插件管理
+Plugin 'Valloric/YouCompleteMe' " 自动补全
+Plugin 'bling/vim-airline' " 状态栏美化
+Plugin 'gorodinskiy/vim-coloresque' " CSS色值高亮
+Plugin 'bronson/vim-trailing-whitespace' " 标红行尾无用空格
+Plugin 'Valloric/MatchTagAlways' " 高亮匹配HTML标签
+Plugin 'gcmt/wildfire.vim' " 选择代码块
+Plugin 'alvan/vim-closetag' " 自动闭合HTML标签
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -66,8 +67,8 @@ if dein#load_state(deinplugins)
     call dein#begin(deinplugins)
     call dein#add(deinpath)
 
-    call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-    call dein#add('Shougo/vimshell.vim')
+    call dein#add('Shougo/vimproc.vim', {'build': 'make'}) " 后台执行插件
+    call dein#add('Shougo/vimshell.vim') " Shell插件
 
     call dein#end()
     call dein#save_state()
@@ -91,12 +92,20 @@ set expandtab
 set hlsearch " 搜索时高亮显示被找到的文本
 set smartindent " 开启新行时使用智能自动缩进
 set laststatus=2    " 永久显示状态栏
+set scrolloff=3   " 底部始终留3行（自动滚动）
+
+" markdown-preview
+let g:mkdp_auto_start = 1
+let g:mkdp_auto_close = 0
+
+" vim-markdown
+let g:vim_markdown_folding_disabled = 1
 
 " VimShell
 let g:vimshell_prompt_expr = 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
 let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
 
-
+" 当NERDTree是最后一个buffer时自动退出
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 set completeopt=longest,menu
@@ -119,6 +128,7 @@ inoremap ' ''<ESC>i
 inoremap " ""<ESC>i
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
+inoremap } {}<ESC>i
 inoremap { {<CR>}<Esc>O
 
 "设置跳出自动补全的括号

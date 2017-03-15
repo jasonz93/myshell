@@ -6,7 +6,7 @@ function vim {
         mkdir -p ~/.vim/bundle
         git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     fi
-    
+
     # Install dein
     if [ ! -f ~/.vim/bundle/dein.vim/README.md ]; then
         echo "Installing dein..."
@@ -15,18 +15,21 @@ function vim {
     fi
 
     # Install vim-instant-markdown
-    if node -v; then
-        echo "Node.JS detected, installing vim-instant-markdown"
-        if ! npm ls -g|grep instant-markdown-d; then
-            npm install -g instant-markdown-d
-        fi
-    fi
+    #if node -v; then
+    #    echo "Node.JS detected, installing vim-instant-markdown"
+    #    if ! npm ls -g|grep instant-markdown-d; then
+    #        npm install -g instant-markdown-d
+    #    fi
+    #fi
 
-    # Install vimdebug
+    # Install markdown-preview
+    pip install markdown pygments
+
+    # Install node-inspector
     if node -v; then
-        echo "Node.JS detected, installing vimdebug"
-        if ! npm ls -g|grep vimdebug; then
-            npm install -g vimdebug
+        echo "Node.JS detected, installing node-inspector, you can use 'node-debug {your script or entry}' to debug you Node.JS script"
+        if ! npm ls -g|grep node-inspector; then
+            npm install -g node-inspector
         fi
     fi
 
